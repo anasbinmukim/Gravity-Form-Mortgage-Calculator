@@ -136,17 +136,17 @@ class RMGFLoanCalculator extends GFAddOn {
 						P = parseInt(principle);
 						I = parseFloat(rate) / 100 / 12;
 				}else {
-							if (mcbuyorrefi == "Buy a home") {
-									P = parseInt(mchomevalue);
-									I = 4 / 100 / 12;
-									jQuery("#miniCalcRate").val('4.5');
-									jQuery("#miniCalcPrinciple").val(numberWithCommas(mchomevalue));
-							} else {
+							if (mcbuyorrefi == "Refinance") {
 									P = parseInt(mccurrentlyowe);
 									I = parseFloat(mccurrentrate) / 100 / 12;
 									//jQuery("#miniCalcRate").val(mccurrentrate);
 									jQuery("#miniCalcRate").val('4.5');
 									jQuery("#miniCalcPrinciple").val(numberWithCommas(mccurrentlyowe));
+							} else {
+									P = parseInt(mchomevalue);
+									I = 4 / 100 / 12;
+									jQuery("#miniCalcRate").val('4.5');
+									jQuery("#miniCalcPrinciple").val(numberWithCommas(mchomevalue));
 							}
 					}
 				var N = 30 * 12;
@@ -228,6 +228,10 @@ class RMGFLoanCalculator extends GFAddOn {
 					$form_settings = $form_meta['gravityformsrmloancalculator'];
 				}
 
+				// echo "<pre>";
+				// print_r($form_settings);
+				// echo "</pre>";
+
 
 				if(isset($form_settings['buy_or_refi'])){
 					$buy_or_refi_field = $form_settings['buy_or_refi'];
@@ -261,6 +265,7 @@ class RMGFLoanCalculator extends GFAddOn {
 						}
 				}
 
+				//echo $estimated_price_value;
 
 		}
 
@@ -272,7 +277,7 @@ class RMGFLoanCalculator extends GFAddOn {
 
 		<div class="calculator-wrap"><span class="finalPayment">Payment: $718.47*</span>
 		<span class="mort-cal-estd-loan-amount">
-			Estimated Loan Amount: $<input id="miniCalcPrinciple" class="miniCalc input-number-comma-type">
+			Estimated Loan Amount: $<input id="miniCalcPrinciple" class="miniCalc input-number-comma-type" value="">
 		</span>
 		<span class="mort-cal-interested-rate">
 		Interest Rate:
